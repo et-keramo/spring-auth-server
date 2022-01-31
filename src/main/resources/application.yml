@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: auth-server
+  profiles:
+    active:
+      default
+  config:
+    import: configserver:http://127.0.0.1:8888
+
+auth:
+# 인증 유형 : LOCAL
+#  type: LOCAL
+#  url: http://127.0.0.1:9100
+
+# 인증 유형 : KEYCLOAK
+  type: KEYCLOAK
+  url: http://127.0.0.1:8180/auth/realms/master
