@@ -2,9 +2,8 @@ package et.keramo.authsvr.config;
 
 import com.google.common.collect.ImmutableList;
 import et.keramo.authsvr.constants.SecurityConstants;
-import et.keramo.authsvr.service.auth.AbstractAuthService;
-import et.keramo.authsvr.service.auth.keycloak.KeycloakAuthService;
-import et.keramo.authsvr.service.auth.local.LocalAuthService;
+import et.keramo.authsvr.service.local.keycloak.KeycloakAuthService;
+import et.keramo.authsvr.service.local.local.LocalAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

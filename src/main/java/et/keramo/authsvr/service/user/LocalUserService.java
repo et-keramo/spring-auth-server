@@ -1,7 +1,7 @@
-package et.keramo.authsvr.service.auth.user;
+package et.keramo.authsvr.service.user;
 
-import et.keramo.authsvr.repository.rdb.auth.user.User;
-import et.keramo.authsvr.repository.rdb.auth.user.UserRepository;
+import et.keramo.authsvr.repository.rdb.local.user.User;
+import et.keramo.authsvr.repository.rdb.local.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-@Qualifier("userService")
-public class UserService {
+@Qualifier("localUserService")
+public class LocalUserService {
 
     private final PasswordEncoder encoder;
     private final UserRepository repository;

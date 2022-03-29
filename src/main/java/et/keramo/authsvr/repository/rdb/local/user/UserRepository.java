@@ -1,4 +1,4 @@
-package et.keramo.authsvr.repository.rdb.auth.user;
+package et.keramo.authsvr.repository.rdb.local.user;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;

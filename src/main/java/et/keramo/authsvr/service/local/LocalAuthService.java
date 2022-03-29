@@ -1,20 +1,18 @@
-package et.keramo.authsvr.service.auth.local;
+package et.keramo.authsvr.service.local;
 
 import et.keramo.authsvr.constants.SecurityConstants;
 import et.keramo.authsvr.exception.AuthServerException;
-import et.keramo.authsvr.repository.rdb.auth.client.Client;
-import et.keramo.authsvr.repository.rdb.auth.client.ClientRepository;
-import et.keramo.authsvr.service.auth.AbstractAuthService;
+import et.keramo.authsvr.repository.rdb.local.client.Client;
+import et.keramo.authsvr.repository.rdb.local.client.ClientRepository;
+import et.keramo.authsvr.service.AbstractAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.exceptions.BadClientCredentialsException;
 import org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +24,6 @@ import java.util.Optional;
 @Qualifier("localAuthService")
 public class LocalAuthService extends AbstractAuthService {
 
-    @Value("${auth.url}")
-    private String authUrl;
-
     private final PasswordEncoder encoder;
     private final CheckTokenEndpoint checkTokenEndpoint;
     private final DefaultTokenServices tokenServices;
@@ -36,8 +31,10 @@ public class LocalAuthService extends AbstractAuthService {
 
     @Override
     public Object login(HttpServletRequest request, HttpServletResponse response) throws AuthServerException {
-        MultiValueMap<String, String> formData = this.getFormData(request);
-        return this.postRequest(this.authUrl + SecurityConstants.LOCAL_LOGIN_PATH, formData);
+        return this.postRequest(
+                this.makePath(SecurityConstants.LOCAL_LOGIN_PATH),
+                this.getRequestData(request)
+        );
     }
 
     @Override

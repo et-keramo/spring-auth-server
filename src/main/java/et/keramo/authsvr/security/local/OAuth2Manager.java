@@ -1,8 +1,8 @@
 package et.keramo.authsvr.security.local;
 
 import et.keramo.authsvr.constants.SecurityConstants;
-import et.keramo.authsvr.repository.rdb.auth.user.User;
-import et.keramo.authsvr.repository.rdb.auth.user.UserRepository;
+import et.keramo.authsvr.repository.rdb.local.user.User;
+import et.keramo.authsvr.repository.rdb.local.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

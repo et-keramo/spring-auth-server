@@ -1,7 +1,6 @@
 package et.keramo.authsvr.api.rest.auth;
 
 import et.keramo.authsvr.exception.AuthServerException;
-import et.keramo.authsvr.service.auth.AbstractAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class OAuth2RestController {
     @RequestMapping(value = "validation", method = RequestMethod.POST)
     public Object validation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            return this.authService.login(request, response);
+            return this.authService.validate(request, response);
         } catch (AuthServerException e) {
             return new OAuth2ErrorDto(e);
         }
@@ -38,7 +37,7 @@ public class OAuth2RestController {
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     public Object logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            return this.authService.login(request, response);
+            return this.authService.logout(request, response);
         } catch (AuthServerException e) {
             return new OAuth2ErrorDto(e);
         }

@@ -1,7 +1,7 @@
 package et.keramo.authsvr.api.rest.auth.client;
 
-import et.keramo.authsvr.service.auth.client.ClientDto;
-import et.keramo.authsvr.service.auth.client.ClientService;
+import et.keramo.authsvr.service.local.local.client.ClientDto;
+import et.keramo.authsvr.service.local.local.client.ClientService;
 import et.keramo.common.api.ApiResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

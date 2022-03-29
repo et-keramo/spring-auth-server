@@ -1,6 +1,6 @@
-package et.keramo.authsvr.service.auth.client;
+package et.keramo.authsvr.service.client;
 
-import et.keramo.authsvr.repository.rdb.auth.client.Client;
+import et.keramo.authsvr.repository.rdb.local.client.Client;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

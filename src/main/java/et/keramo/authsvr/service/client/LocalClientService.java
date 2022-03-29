@@ -1,7 +1,7 @@
-package et.keramo.authsvr.service.auth.client;
+package et.keramo.authsvr.service.client;
 
-import et.keramo.authsvr.repository.rdb.auth.client.Client;
-import et.keramo.authsvr.repository.rdb.auth.client.ClientRepository;
+import et.keramo.authsvr.repository.rdb.local.client.Client;
+import et.keramo.authsvr.repository.rdb.local.client.ClientRepository;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-@Qualifier("clientService")
-public class ClientService {
+@Qualifier("localClientService")
+public class LocalClientService {
 
     private final PasswordEncoder encoder;
     private final TokenStore tokenStore;
@@ -56,18 +56,7 @@ public class ClientService {
         return savedClientDto;
     }
 
-    public boolean delete(String clientId) {
-        this.repository.deleteById(clientId);
-        this.tokenStore.findTokensByClientId(clientId).forEach(accessToken -> {
-            if (accessToken.getRefreshToken() != null) {
-                this.tokenStore.removeRefreshToken(accessToken.getRefreshToken());
-            }
-            this.tokenStore.removeAccessToken(accessToken);
-        });
-        return true;
-    }
-
-    public String regenerateSecret(String clientId, String secret) throws Exception {
+    public String updateSecret(String clientId, String secret) throws Exception {
         Client client = this.checkClient(clientId);
 
         if (this.encoder.matches(secret, client.getSecret())) {
@@ -121,6 +110,17 @@ public class ClientService {
 
         this.repository.saveAndFlush(clientDto.toEntity());
 
+        return true;
+    }
+
+    public boolean delete(String clientId) {
+        this.repository.deleteById(clientId);
+        this.tokenStore.findTokensByClientId(clientId).forEach(accessToken -> {
+            if (accessToken.getRefreshToken() != null) {
+                this.tokenStore.removeRefreshToken(accessToken.getRefreshToken());
+            }
+            this.tokenStore.removeAccessToken(accessToken);
+        });
         return true;
     }
 

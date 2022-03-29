@@ -27,8 +27,24 @@ public final class SecurityConstants {
 
     // KEYCLOAK
     public static final String KEYCLOAK_AUTH_TYPE = "KEYCLOAK";
+    public static final String KEYCLOAK_URL_FORMAT = "/auth/realms/%s";
+    public static final String KEYCLOAK_ADMIN_URL_FORMAT = "/auth/admin/realms/%s";
     public static final String KEYCLOAK_LOGIN_PATH = "/protocol/openid-connect/token";
     public static final String KEYCLOAK_VALIDATION_PATH = "/protocol/openid-connect/token/introspect";
     public static final String KEYCLOAK_LOGOUT_PATH = "/protocol/openid-connect/revoke";
+    public static final String KEYCLOAK_CLIENT_PATH = "/clients";
+    public static final String KEYCLOAK_CLIENT_SECRET_PATH = "/client-secret";
+    public static final String FREE_IPA_AUTH_PATH = "/login_password";
+    public static final String FREE_IPA_JSON_PATH = "/json";
+    public static final String FREE_IPA_USER_LIST_METHOD = "user_find";
+    public static final String FREE_IPA_USER_GET_METHOD = "user_show";
+    public static final String FREE_IPA_USER_ADD_METHOD = "user_add";
+    public static final String FREE_IPA_USER_UPDATE_METHOD = "user_mod";
+    public static final String FREE_IPA_USER_DELETE_METHOD = "user_del";
+    public static final String FREE_IPA_GROUP_LIST_METHOD = "group_find";
+    public static final String FREE_IPA_GROUP_GET_METHOD = "group_show";
+    public static final String FREE_IPA_GROUP_ADD_METHOD = "group_add";
+    public static final String FREE_IPA_GROUP_UPDATE_METHOD = "group_mod";
+    public static final String FREE_IPA_GROUP_DELETE_METHOD = "group_del";
 
 }
