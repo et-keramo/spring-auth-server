@@ -1,3 +1,59 @@
+-- 사용자 정보
+CREATE TABLE "oauth_user_info"
+(
+	"user_id"    CHARACTER VARYING(50)  NOT NULL, -- 사용자ID
+	"user_nm"    CHARACTER VARYING(50)  NOT NULL, -- 사용자명
+	"client_id"  CHARACTER VARYING(256) NOT NULL, -- 클라이언트ID
+	"group_id"   CHARACTER VARYING(256) NOT NULL, -- 그룹ID
+	"user_info"  TEXT                   NULL,     -- 사용자정보
+	"req_dt"     DATE                   NOT NULL, -- 요청일시
+	"confirm_dt" DATE                   NULL      -- 승인일시
+)
+WITH (
+OIDS=false
+);
+
+-- 사용자 정보
+COMMENT ON TABLE "oauth_user_info" IS '사용자 정보';
+
+-- 사용자ID
+COMMENT ON COLUMN "oauth_user_info"."user_id" IS '사용자ID';
+
+-- 사용자명
+COMMENT ON COLUMN "oauth_user_info"."user_nm" IS '사용자명';
+
+-- 클라이언트ID
+COMMENT ON COLUMN "oauth_user_info"."client_id" IS '클라이언트ID';
+
+-- 그룹ID
+COMMENT ON COLUMN "oauth_user_info"."group_id" IS '그룹ID';
+
+-- 사용자정보
+COMMENT ON COLUMN "oauth_user_info"."user_info" IS '사용자정보';
+
+-- 요청일시
+COMMENT ON COLUMN "oauth_user_info"."req_dt" IS '요청일시';
+
+-- 승인일시
+COMMENT ON COLUMN "oauth_user_info"."confirm_dt" IS '승인일시';
+
+-- 사용자 정보 기본키
+CREATE UNIQUE INDEX "PK_oauth_user_info"
+	ON "oauth_user_info"
+	( -- 사용자 정보
+		"user_id" ASC -- 사용자ID
+	)
+;
+-- 사용자 정보
+ALTER TABLE "oauth_user_info"
+	ADD CONSTRAINT "PK_oauth_user_info"
+		 -- 사용자 정보 기본키
+	PRIMARY KEY
+	USING INDEX "PK_oauth_user_info";
+
+-- 사용자 정보 기본키
+COMMENT ON CONSTRAINT "PK_oauth_user_info" ON "oauth_user_info" IS '사용자 정보 기본키';
+
 -- 사용자인증정보
 CREATE TABLE "oauth_user"
 (

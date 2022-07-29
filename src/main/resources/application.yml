@@ -5,4 +5,4 @@ spring:
     active:
       default
   config:
-    import: configserver:http://127.0.0.1:9000
+    import: configserver:http://127.0.0.1:8888

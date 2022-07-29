@@ -1,28 +1,30 @@
 package et.keramo.authsvr.service.user;
 
-import et.keramo.authsvr.repository.rdb.local.user.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+import javax.validation.constraints.NotBlank;
+
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserDto {
 
-    private String username;
+    @NotBlank(message = "사용자 ID는 필수값입니다.")
+    private String userId;
+
     private String password;
-    private String roles;
 
-    public UserDto(User entity) {
-        this.username = entity.getUsername();
-        this.roles = entity.getRoles();
-    }
+    @NotBlank(message = "사용자 명은 필수값입니다.")
+    private String name;
 
-    public User toEntity() {
-        return User.builder()
-                .username(this.username)
-                .password(this.password)
-                .roles(this.roles)
-                .build();
-    }
+    @NotBlank(message = "클라이언트 ID는 필수값입니다.")
+    private String clientId;
+
+    @NotBlank(message = "그룹 ID는 필수값입니다.")
+    private String groupId;
 
 }

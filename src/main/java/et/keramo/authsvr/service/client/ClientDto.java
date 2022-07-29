@@ -1,57 +1,30 @@
 package et.keramo.authsvr.service.client;
 
-import et.keramo.authsvr.repository.rdb.local.client.Client;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+import javax.validation.constraints.*;
+
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ClientDto {
 
-    private static final String DEFAULT_SCOPE = "read,write";
-    private static final String DEFAULT_GRANT_TYPES = "password,refresh_token";
-    private static final Integer DEFAULT_ACCESS_EXPIRED = 3600;
-    private static final Integer DEFAULT_REFRESH_EXPIRED = 10800;
+    public static final Integer DEFAULT_ACCESS_EXPIRED = 3600;
+    public static final Integer DEFAULT_REFRESH_EXPIRED = 10800;
 
+    @NotBlank(message = "클라이언트 ID는 필수값입니다.")
     private String clientId;
+
     private String secret;
-    private String resourceIds;
-    private String scope;
-    private String authorizedGrantTypes;
-    private String webServerRedirectUri;
-    private String authorities;
+
+    @NotEmpty(message = "인증 유형은 최소 1가지 이상 지정해야합니다.")
+    private String[] grantTypes;
+
+    @Min(value = 300, message = "액세스 토큰 유효시간은 최소 5분(360초) 입니다.")
     private Integer accessTokenValidity;
+
+    @Min(value = 1800, message = "리프레시 토큰 유효시간은 최소 30분(1800초) 입니다.")
     private Integer refreshTokenValidity;
-    private String additionalInformation;
-    private String autoapprove;
-
-    public ClientDto(Client entity) {
-        this.clientId = entity.getClientId();
-        this.resourceIds = entity.getResourceIds();
-        this.scope = entity.getScope();
-        this.authorizedGrantTypes = entity.getAuthorizedGrantTypes();
-        this.webServerRedirectUri = entity.getWebServerRedirectUri();
-        this.authorities = entity.getAuthorities();
-        this.accessTokenValidity = entity.getAccessTokenValidity();
-        this.refreshTokenValidity = entity.getRefreshTokenValidity();
-        this.additionalInformation = entity.getAdditionalInformation();
-        this.autoapprove = entity.getAutoapprove();
-    }
-
-    public Client toEntity() {
-        return Client.builder()
-                .clientId(this.clientId)
-                .secret(this.secret)
-                .resourceIds(this.resourceIds)
-                .scope(this.scope == null ? DEFAULT_SCOPE : this.scope)
-                .authorizedGrantTypes(this.authorizedGrantTypes == null ? DEFAULT_GRANT_TYPES : this.authorizedGrantTypes)
-                .webServerRedirectUri(this.webServerRedirectUri)
-                .authorities(this.authorities)
-                .accessTokenValidity(this.accessTokenValidity == null ? DEFAULT_ACCESS_EXPIRED : this.accessTokenValidity)
-                .refreshTokenValidity(this.refreshTokenValidity == null ? DEFAULT_REFRESH_EXPIRED : this.refreshTokenValidity)
-                .additionalInformation(this.additionalInformation)
-                .autoapprove(this.autoapprove)
-                .build();
-    }
 
 }
